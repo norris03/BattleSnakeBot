@@ -22,10 +22,10 @@ def info() -> typing.Dict:
 
     return {
         "apiversion": "1",
-        "author": "",  # TODO: Your Battlesnake Username
-        "color": "#888888",  # TODO: Choose color
-        "head": "default",  # TODO: Choose head
-        "tail": "default",  # TODO: Choose tail
+        "author": "snek14",  # TODO: Your Battlesnake Username
+        "color": "#FFFF00",  # TODO: Choose color
+        "head": "fang",  # TODO: Choose head
+        "tail": "block-bum",  # TODO: Choose tail
     }
 
 
@@ -42,7 +42,39 @@ def end(game_state: typing.Dict):
 # move is called on every turn and returns your next move
 # Valid moves are "up", "down", "left", or "right"
 # See https://docs.battlesnake.com/api/example-move for available data
+from update_game_state import clean_game_state
+from game_tree import Node
+from minimax import minimax
+from constants import *
+#import time
 def move(game_state: typing.Dict) -> typing.Dict:
+    #start_time = time.time()
+    next_move = "down"
+    board = clean_game_state(game_state)
+    tree_depth = 0.5
+    number_of_enemies = len(game_state["board"]["snakes"])
+    if number_of_enemies == 1:
+        tree_depth = 2
+    elif number_of_enemies == 2:
+        tree_depth = 1.5
+    else:
+        tree_depth = 1
+    n = Node(board, "", True)
+    n.create_tree(tree_depth, True)
+    best_score = minimax(n, tree_depth, death_score, win_score, True)
+    for child in n.children:
+        if child.score == best_score:
+            next_move = child.move
+            break
+    if best_score == death_score:
+        best_score = minimax(n, 0.5, death_score, win_score, True)
+        for child in n.children:
+            if child.score == best_score:
+                next_move = child.move
+                break
+    #end_time = time.time()
+    #print(round((end_time-start_time)*10**3), "ms execution time, at a depth of ", tree_depth)
+    return {"move": next_move}
 
     is_move_safe = {"up": True, "down": True, "left": True, "right": True}
 
