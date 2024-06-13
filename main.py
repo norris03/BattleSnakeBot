@@ -72,8 +72,14 @@ def move(game_state: typing.Dict) -> typing.Dict:
             if child.score == best_score:
                 next_move = child.move
                 break
+    
+    testing = 0
+    if testing == 1:
+        print(game_state["turn"])
+        for child in n.children:
+            print(child.move, child.score)
     #end_time = time.time()
-    #print(round((end_time-start_time)*10**3), "ms execution time, at a depth of ", tree_depth)
+   #print(round((end_time-start_time)*10**3), "ms execution time, at a depth of ", tree_depth)
     return {"move": next_move}
 
     is_move_safe = {"up": True, "down": True, "left": True, "right": True}
