@@ -10,5 +10,6 @@ w_distance_from_center = -0.5 #[0,1]
 w_edge_penalty = 0 #{-1, 0}
 w_distance_to_food = -1 # [0,1] 
 w_health_bonus = 1 #{x >= 99:1, x < 99: 0}
-w_length = 5 #[0,1]
-w_number_of_enemies = -2 #{0,1,2,3,4,5,6,7}
+w_health = 2 #[0,1]
+w_length = 1 #[0,1]
+w_number_of_enemies = -5 #{0,1,2,3,4,5,6,7}
