@@ -67,7 +67,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
             next_move = child.move
             break
     if best_score == death_score:
-        best_score = minimax(n, 0.5, death_score, win_score, True)
+        best_score = minimax(n, 1, death_score, win_score, True)
         for child in n.children:
             if child.score == best_score:
                 next_move = child.move
