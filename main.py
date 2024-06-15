@@ -54,9 +54,9 @@ def move(game_state: typing.Dict) -> typing.Dict:
     tree_depth = 0.5
     number_of_enemies = len(game_state["board"]["snakes"])
     if number_of_enemies == 1:
-        tree_depth = 2
+        tree_depth = 3
     elif number_of_enemies == 2:
-        tree_depth = 1.5
+        tree_depth = 2
     else:
         tree_depth = 1
     n = Node(board, "", True)
