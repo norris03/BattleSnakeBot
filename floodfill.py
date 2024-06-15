@@ -1,4 +1,5 @@
 import numpy as np
+from collections import deque
 from constants import *
 def create_grid(game_state):
     if game_state == {}:
@@ -18,17 +19,23 @@ def fill(game_state, x, y):
     grid = create_grid(game_state)  
     if grid is None:
         return -1
-    l = [(x,y)]
+    #l = [(x,y)]
+    l = deque()
     while len(l) != 0:
-        (x, y) = l.pop(0)
+        #(x, y) = l.pop(0)
+        (x, y) = l.pop()
         if 0 <= x <= max_x and 0 <= y <= max_y:
             if grid[x][y] == 0:
                 grid[x][y] = 4
                 score += 1
-                l.insert(0, (x, y + 1))
-                l.insert(0, (x, y - 1))
-                l.insert(0, (x + 1, y))
-                l.insert(0, (x - 1, y))
+                #l.insert(0, (x, y + 1))
+                #l.insert(0, (x, y - 1))
+                #l.insert(0, (x + 1, y))
+                #l.insert(0, (x - 1, y))
+                l.append(0, (x, y + 1))
+                l.append(0, (x, y - 1))
+                l.append(0, (x + 1, y))
+                l.append(0, (x - 1, y))
         if score > max_flood_fill_score:
             break
     return score
