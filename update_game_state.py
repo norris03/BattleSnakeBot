@@ -33,7 +33,7 @@ def update_game_state(game_state, move, is_our_turn):
             game_state["you"]["body"].insert(0,{"x":head["x"]-1,"y":head["y"]})
         head = game_state["you"]["body"][0]
         if head in game_state["board"]["food"]:
-            game_state["you"]["heath"] = 100
+            game_state["you"]["health"] = 100
             game_state["you"]["length"] += 1 
         else:
             game_state["you"]["health"] -= 1
