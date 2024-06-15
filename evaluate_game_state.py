@@ -61,7 +61,8 @@ def evaluate_game_state(game_state):
         
         game_state_score = (
                 w_distance_to_food*distance_to_food_score                
-                +w_health_bonus*health_bonus                
+                +w_health_bonus*health_bonus   
+                +w_health*health_score             
                 +w_distance_from_center*distance_from_center_score         
                 +w_tail_bonus*tail_bonus
                 +w_edge_penalty*edge_penalty
