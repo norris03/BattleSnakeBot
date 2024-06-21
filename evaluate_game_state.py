@@ -47,7 +47,7 @@ def evaluate_game_state(game_state):
 
         health_score = game_state["you"]["health"]/100
         health_bonus = 0
-        if health_score == 1:
+        if health_score >= 0.98:
             health_bonus = 1
 
         length_score = length/board_area
@@ -73,3 +73,4 @@ def evaluate_game_state(game_state):
                 +w_edge_penalty*edge_penalty
             )
         return game_state_score
+    
