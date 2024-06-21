@@ -46,21 +46,34 @@ from update_game_state import clean_game_state
 from game_tree import Node
 from minimax import minimax
 from constants import *
-#import time
+import time
+decision_time = 0
+decision_time_debuff = 0
+
 def move(game_state: typing.Dict) -> typing.Dict:
-    #start_time = time.time()
+    global decision_time, decision_time_debuff
+    start_time = time.time()
     next_move = "down"
     board = clean_game_state(game_state)
     tree_depth = 0.5
     number_of_enemies = len(game_state["board"]["snakes"])
-    if number_of_enemies == 0:
-        0.5
+    if number_of_enemies == 0 or game_state["turn"] <= 5:
+        tree_depth = 0.5
     elif number_of_enemies == 1:
-        tree_depth = 1
+        tree_depth = 3 - decision_time_debuff
     elif number_of_enemies == 2:
-        tree_depth = 1
+        tree_depth = 2 - decision_time_debuff
     else:
         tree_depth = 1
+    
+    if decision_time >= 500:
+        decision_time_debuff += 0.5
+    elif decision_time_debuff >= 0.5:
+        decision_time_debuff -= 0.5
+
+    print(game_state["turn"])
+    print(decision_time_debuff)
+
     n = Node(board, "", True)
     n.create_tree(tree_depth, True)
     best_score = minimax(n, tree_depth, death_score, win_score, True)
@@ -75,62 +88,9 @@ def move(game_state: typing.Dict) -> typing.Dict:
                 next_move = child.move
                 break
     
-    testing = 0
-    if testing == 1:
-        print(game_state["turn"])
-        for child in n.children:
-            print(child.move, child.score)
-    #end_time = time.time()
-   #print(round((end_time-start_time)*10**3), "ms execution time, at a depth of ", tree_depth)
+    end_time = time.time()
+    decision_time = (end_time-start_time)*10**3
     return {"move": next_move}
-
-    is_move_safe = {"up": True, "down": True, "left": True, "right": True}
-
-    # We've included code to prevent your Battlesnake from moving backwards
-    my_head = game_state["you"]["body"][0]  # Coordinates of your head
-    my_neck = game_state["you"]["body"][1]  # Coordinates of your "neck"
-
-    if my_neck["x"] < my_head["x"]:  # Neck is left of head, don't move left
-        is_move_safe["left"] = False
-
-    elif my_neck["x"] > my_head["x"]:  # Neck is right of head, don't move right
-        is_move_safe["right"] = False
-
-    elif my_neck["y"] < my_head["y"]:  # Neck is below head, don't move down
-        is_move_safe["down"] = False
-
-    elif my_neck["y"] > my_head["y"]:  # Neck is above head, don't move up
-        is_move_safe["up"] = False
-
-    # TODO: Step 1 - Prevent your Battlesnake from moving out of bounds
-    # board_width = game_state['board']['width']
-    # board_height = game_state['board']['height']
-
-    # TODO: Step 2 - Prevent your Battlesnake from colliding with itself
-    # my_body = game_state['you']['body']
-
-    # TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
-    # opponents = game_state['board']['snakes']
-
-    # Are there any safe moves left?
-    safe_moves = []
-    for move, isSafe in is_move_safe.items():
-        if isSafe:
-            safe_moves.append(move)
-
-    if len(safe_moves) == 0:
-        print(f"MOVE {game_state['turn']}: No safe moves detected! Moving down")
-        return {"move": "down"}
-
-    # Choose a random move from the safe ones
-    next_move = random.choice(safe_moves)
-
-    # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
-    # food = game_state['board']['food']
-
-    print(f"MOVE {game_state['turn']}: {next_move}")
-    return {"move": next_move}
-
 
 # Start server when `python main.py` is run
 if __name__ == "__main__":
