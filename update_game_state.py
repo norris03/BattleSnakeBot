@@ -1,5 +1,3 @@
-#from test import *
-
 def clean_game_state(game_state):
     del game_state["game"]
     game_state["board"]["snakes"] = [snake for snake in game_state["board"]["snakes"] if snake["id"] != game_state["you"]["id"]]
