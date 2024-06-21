@@ -16,27 +16,24 @@ def fill(game_state, x, y):
     score = 0
     max_x=game_state["board"]["width"]-1
     max_y=game_state["board"]["height"]-1
+    max_space = max_x*max_y-len(game_state["you"]["body"])
+    for snake in game_state["board"]["snakes"]:
+        max_space = max_space - len(snake["body"])
     grid = create_grid(game_state)  
     if grid is None:
         return -1
-    #l = [(x,y)]
     l = deque()
     while len(l) != 0:
-        #(x, y) = l.pop(0)
         (x, y) = l.pop()
         if 0 <= x <= max_x and 0 <= y <= max_y:
             if grid[x][y] == 0:
                 grid[x][y] = 4
                 score += 1
-                #l.insert(0, (x, y + 1))
-                #l.insert(0, (x, y - 1))
-                #l.insert(0, (x + 1, y))
-                #l.insert(0, (x - 1, y))
                 l.append(0, (x, y + 1))
                 l.append(0, (x, y - 1))
                 l.append(0, (x + 1, y))
                 l.append(0, (x - 1, y))
-        if score > max_flood_fill_score:
+        if score > min(max_flood_fill_score,max_space):
             break
     return score
 
