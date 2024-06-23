@@ -70,7 +70,6 @@ def evaluate_game_state(game_state):
                 +w_tail_bonus*tail_bonus              
                 +w_length*length_score
                 +w_number_of_enemies*number_of_enemies
-                +w_edge_penalty*edge_penalty
             )
         return game_state_score
     
