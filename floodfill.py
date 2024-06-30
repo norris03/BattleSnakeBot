@@ -2,6 +2,15 @@ import numpy as np
 from collections import deque
 from constants import *
 def create_grid(game_state):
+    """
+    Erstellt ein Gitter basierend auf dem gegebenen Spielzustand
+
+    Args:
+        game_state (dict): Der gegebene Spielzustand
+
+    Returns:
+        numpy.ndarray: Ein 2D-Array, das das Spielfeld repräsentiert, wobei Felder mit Wert 0 begehbare Felder sind
+    """
     if game_state == {}:
         return 
     grid = np.rot90(np.zeros((game_state["board"]["height"],game_state["board"]["width"])))
@@ -13,6 +22,17 @@ def create_grid(game_state):
     return grid
 
 def fill(game_state, x, y):
+    """
+    Füllt das Spielfeld vom gegebenen Startfeld aus und berechnet die Anzahl der erreichbaren Felder
+
+    Args:
+        game_state (dict): Der gegebene Spielzustand
+        x (int): Die x-Koordinate des Startfelds
+        y (int): Die y-Koordinate des Startfelds
+
+    Returns:
+        int: Die Anzahl der vom Startfeld aus erreichbaren Felder
+    """
     score = 0
     max_x=game_state["board"]["width"]-1
     max_y=game_state["board"]["height"]-1
@@ -38,4 +58,13 @@ def fill(game_state, x, y):
     return score
 
 def flood_fill(game_state):
+    """
+    Führt den Flood-Fill-Algorithmus aus, um die Anzahl der von unserer Schlange aus erreichbaren Felder zu berechnen
+
+    Args:
+        game_state (dict): Der gegebene Spielzustand
+
+    Returns:
+        int: Die Anzahl der von unserer Schlange aus erreichbaren Felder
+    """
     return fill(game_state, game_state["you"]["body"][0]["x"], game_state["you"]["body"][0]["y"])
