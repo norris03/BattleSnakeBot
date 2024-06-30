@@ -1,9 +1,17 @@
 from constants import *
 from floodfill import create_grid, flood_fill
 from math import floor as floor
-from math import ceil as ceil
 from astar import a_star, heuristic
 def evaluate_game_state(game_state):
+    """
+    Bewertet den gegebenen Spielzustand
+
+    Args:
+        game_state (dict): Der gegebene Spielzustand
+
+    Returns:
+        float: Die Bewertung (Punktzahl) des gegebenen Spielzustands
+    """
     if game_state == {}:
         return death_score
     else: 
@@ -66,10 +74,8 @@ def evaluate_game_state(game_state):
                 +w_distance_from_center*distance_from_center_score         
                 +w_tail_bonus*tail_bonus
                 +w_edge_penalty*edge_penalty
-                +w_flood_fill*flood_fill_score  
-                +w_tail_bonus*tail_bonus              
+                +w_flood_fill*flood_fill_score            
                 +w_length*length_score
                 +w_number_of_enemies*number_of_enemies
             )
         return game_state_score
-    
