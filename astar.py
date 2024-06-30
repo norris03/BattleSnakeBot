@@ -1,9 +1,30 @@
 import heapq
 
 def heuristic(a, b):
+    """
+    Berechnet die Manhattan-Metrik zwischen zwei Punkten
+
+    Args:
+        a (tuple): Der erste Punkt als (x, y)-Tupel
+        b (tuple): Der zweite Punkt als (x, y)-Tupel
+
+    Returns:
+        int: Die Manhattan-Metrik zwischen den Punkten a und b
+    """
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 def a_star(grid, start, goal):
+    """
+    Führt den A*-Suchalgorithmus aus, um den kürzesten Weg von einem Startfeld zu einem Zielfeld zu finden
+
+    Args:
+        grid (list of list of int): Das Spielfeld als 2D-Liste, wobei Felder mit Wert 0 begehbare Felder sind
+        start (tuple): Das Startfeld als (x, y)-Tupel
+        goal (tuple): Das Zielfeld als (x, y)-Tupel
+
+    Returns:
+        int: Die Länge des kürzesten Weges vom Startfeld zum Zielfeld (unendlich falls kein Weg existiert)
+    """
     rows, cols = len(grid), len(grid[0])
     open_set = []
     heapq.heappush(open_set, (0, start))
