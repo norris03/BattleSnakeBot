@@ -1,4 +1,13 @@
 def clean_game_state(game_state):
+    """
+    Bereinigt den Spielzustand, indem unnötige Informationen entfernt werden
+
+    Args:
+        game_state (dict): Der gegebene Spielzustand
+
+    Returns:
+        dict: Der bereinigte Spielzustand
+    """
     del game_state["game"]
     game_state["board"]["snakes"] = [snake for snake in game_state["board"]["snakes"] if snake["id"] != game_state["you"]["id"]]
     for snake in game_state["board"]["snakes"]:
@@ -14,6 +23,17 @@ def clean_game_state(game_state):
 
 
 def update_game_state(game_state, move, is_our_turn):
+    """
+    Aktualisiert den Spielzustand basierend auf den gegebenen Zügen
+
+    Args:
+        game_state (dict): Der gegebene Spielzustand
+        move (str or list of str): Der Zug, der von uns, oder die Züge, die von den Gegnern gemacht werden
+        is_our_turn (bool): True, wenn unsere Schlange am Zug ist, False sonst
+
+    Returns:
+        dict: Der aktualisierte Spielzustand
+    """
     if move == "":
         return game_state
     if game_state == {}:
@@ -31,7 +51,7 @@ def update_game_state(game_state, move, is_our_turn):
             game_state["you"]["body"].insert(0,{"x":head["x"]-1,"y":head["y"]})
         head = game_state["you"]["body"][0]
         if head in game_state["board"]["food"]:
-            game_state["you"]["health"] = 100
+            game_state["you"]["health"] = 100 
             game_state["you"]["length"] += 1 
         else:
             game_state["you"]["health"] -= 1
