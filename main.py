@@ -71,9 +71,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
     elif decision_time_debuff >= 0.5:
         decision_time_debuff -= 0.5
 
-    print(game_state["turn"])
-    print(decision_time_debuff)
-
     n = Node(board, "", True)
     n.create_tree(tree_depth, True)
     best_score = minimax(n, tree_depth, death_score, win_score, True)
