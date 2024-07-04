@@ -57,7 +57,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     board = clean_game_state(game_state)
     tree_depth = 0.5
     number_of_enemies = len(game_state["board"]["snakes"])
-    if number_of_enemies == 0 or game_state["turn"] <= 5:
+    if number_of_enemies == 0 or game_state["turn"] <= 2:
         tree_depth = 0.5
     elif number_of_enemies == 1:
         tree_depth = 3 - decision_time_debuff
