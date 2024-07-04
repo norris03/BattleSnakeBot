@@ -66,7 +66,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     else:
         tree_depth = 1
     
-    if decision_time >= 500:
+    if decision_time >= 450:
         decision_time_debuff += 0.5
     elif decision_time_debuff >= 0.5:
         decision_time_debuff -= 0.5
