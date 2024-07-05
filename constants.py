@@ -1,3 +1,11 @@
+"""
+Baidinger, Artur 220201391
+Haufe, Hans-Hauke 222200976
+Hellerich, Hannes 222201181
+Löbnau, Norris 222200294
+Rieck, Damijan Ali 218200608
+Strompen, Zoe Katharina 221200152
+"""
 death_score = -2**20
 win_score = 2**20
 max_flood_fill_score = 121
