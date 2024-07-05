@@ -1,3 +1,11 @@
+"""
+Baidinger, Artur 220201391
+Haufe, Hans-Hauke 222200976
+Hellerich, Hannes 222201181
+Löbnau, Norris 222200294
+Rieck, Damijan Ali 218200608
+Strompen, Zoe Katharina 221200152
+"""
 # Welcome to
 # __________         __    __  .__                               __
 # \______   \_____ _/  |__/  |_|  |   ____   ______ ____ _____  |  | __ ____
