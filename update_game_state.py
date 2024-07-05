@@ -1,3 +1,11 @@
+"""
+Baidinger, Artur 220201391
+Haufe, Hans-Hauke 222200976
+Hellerich, Hannes 222201181
+Löbnau, Norris 222200294
+Rieck, Damijan Ali 218200608
+Strompen, Zoe Katharina 221200152
+"""
 def clean_game_state(game_state):
     """
     Bereinigt den Spielzustand, indem unnötige Informationen entfernt werden
